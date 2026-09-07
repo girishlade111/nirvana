@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirvana — Spa, Relax, Adventure</title>
+  <meta name="description" content="A sanctuary of escape to help people reset themselves. Luxury yoga, fitness & wellbeing retreats." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --font-primary: 'PT Sans', sans-serif;
+      --font-size-xs: 12px;
+      --font-size-sm: 16px;
+      --font-size-md: 21.33px;
+      --font-size-lg: 28.43px;
+      --font-size-xl: 37.9px;
+      --font-size-2xl: 67.34px;
+      --font-weight-base: 400;
+      --font-weight-bold: 700;
+      --line-height-base: 23.2px;
+      --color-text-primary: #7f7f7f;
+      --color-text-secondary: #0a2d63;
+      --color-text-tertiary: #ffffff;
+      --color-text-inverse: #6a6a6a;
+      --color-surface-base: #000000;
+      --color-surface-strong: #fafafa;
+      --space-1: 4px;
+      --space-2: 5px;
+      --space-3: 6.4px;
+      --space-4: 8px;
+      --space-5: 12.8px;
+      --space-6: 16px;
+      --space-7: 19.2px;
+      --space-8: 21.33px;
+      --radius-xs: 3px;
+      --radius-sm: 50px;
+      --shadow-1: rgb(0, 0, 0) 0px 0px 0px 0px;
+      --motion-instant: 150ms;
+      --motion-fast: 200ms;
+      --motion-normal: 400ms;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-base);
+      line-height: var(--line-height-base);
+      color: var(--color-text-primary);
+      background-color: var(--color-surface-strong);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--color-text-secondary); text-decoration: none; transition: color var(--motion-instant) ease; }
+    a:hover { color: #143d7a; }
+    a:focus-visible { outline: 2px solid var(--color-text-secondary); outline-offset: 2px; border-radius: var(--radius-xs); }
+    img { max-width: 100%; height: auto; display: block; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    .topbar {
+      background: var(--color-text-secondary);
+      color: var(--color-text-tertiary);
+      font-size: var(--font-size-xs);
+      padding: var(--space-3) 0;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .topbar a { color: var(--color-text-tertiary); text-decoration: underline; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-text-tertiary);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) 0;
+    }
+    .nav-logo { display: flex; align-items: center; gap: var(--space-4); }
+    .nav-logo span { font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); color: var(--color-text-secondary); letter-spacing: 4px; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: var(--space-7); list-style: none; }
+    .nav-links a { font-size: var(--font-size-xs); letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-primary); position: relative; padding: var(--space-1) 0; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--color-text-secondary); }
+    .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: var(--space-2); color: var(--color-text-secondary); font-size: var(--font-size-md); appearance: none; }
+    .nav-toggle:focus-visible { outline: 2px solid var(--color-text-secondary); outline-offset: 2px; }
+    @media (max-width: 900px) {
+      .nav-toggle { display: block; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-text-tertiary); flex-direction: column; padding: var(--space-6); border-bottom: 1px solid rgba(0,0,0,0.06); gap: var(--space-6); }
+      .nav-links.open { display: flex; }
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--color-text-tertiary);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0a2d63 0%, #1a4a7a 50%, #2a5a3a 100%);
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.06"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="white"/></svg>') repeat;
+      background-size: 80px;
+    }
+    .hero-content { position: relative; z-index: 1; padding: var(--space-6); max-width: 800px; }
+    .hero-sub { font-size: var(--font-size-xs); letter-spacing: 4px; text-transform: uppercase; margin-bottom: var(--space-6); opacity: 0.8; }
+    .hero-title { font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); line-height: 1.1; margin-bottom: var(--space-7); }
+    .hero-tags { display: flex; justify-content: center; gap: var(--space-6); font-size: var(--font-size-sm); letter-spacing: 2px; text-transform: uppercase; margin-bottom: var(--space-8); }
+    .hero-tags span { opacity: 0.7; }
+    .btn {
+      display: inline-block;
+      padding: var(--space-5) var(--space-8);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 0;
+      cursor: pointer;
+      transition: all var(--motion-fast) ease;
+      border-radius: 0;
+      line-height: 1;
+    }
+    .btn:focus-visible { outline: 2px solid var(--color-text-secondary); outline-offset: 3px; }
+    .btn-primary { background: var(--color-text-secondary); color: var(--color-text-tertiary); }
+    .btn-primary:hover { background: #143d7a; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-outline { background: transparent; color: var(--color-text-tertiary); border: 2px solid var(--color-text-tertiary); }
+    .btn-outline:hover { background: var(--color-text-tertiary); color: var(--color-text-secondary); }
+    .btn-inverse { background: var(--color-text-tertiary); color: var(--color-text-secondary); }
+    .btn-inverse:hover { background: var(--color-surface-strong); }
+
+    .section { padding: 100px 0; }
+    .section-dark { background: var(--color-text-secondary); color: var(--color-text-tertiary); }
+    .section-light { background: var(--color-text-tertiary); }
+    .section-label { font-size: var(--font-size-xs); letter-spacing: 4px; text-transform: uppercase; margin-bottom: var(--space-5); opacity: 0.6; }
+    .section-title { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-text-secondary); margin-bottom: var(--space-6); line-height: 1.2; }
+    .section-dark .section-title { color: var(--color-text-tertiary); }
+    .section-desc { max-width: 700px; margin-bottom: var(--space-8); font-size: var(--font-size-sm); line-height: 1.8; }
+
+    .retreats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
+    .retreat-card { background: var(--color-text-tertiary); text-align: center; padding: 0 0 var(--space-8); box-shadow: 0 2px 20px rgba(0,0,0,0.04); transition: transform var(--motion-normal) ease; }
+    .retreat-card:hover { transform: translateY(-4px); }
+    .retreat-card-img { height: 220px; overflow: hidden; }
+    .retreat-card-img div { width: 100%; height: 100%; background-size: cover; background-position: center; }
+    .retreat-card-cat { font-size: var(--font-size-xs); letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-secondary); margin: var(--space-6) 0 var(--space-2); }
+    .retreat-card-date { font-size: var(--font-size-xs); letter-spacing: 1px; color: var(--color-text-primary); margin-bottom: var(--space-5); }
+    .retreat-card h3 { font-size: var(--font-size-md); color: var(--color-text-secondary); }
+    .retreat-card p { font-size: var(--font-size-sm); color: var(--color-text-primary); padding: 0 var(--space-6); margin: var(--space-5) 0; line-height: 1.7; }
+    .retreat-card .btn { margin-top: var(--space-4); }
+    @media (max-width: 900px) { .retreats-grid { grid-template-columns: 1fr; } }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
+    .feature-card { position: relative; overflow: hidden; border-radius: 0; }
+    .feature-card-img { height: 300px; background-size: cover; background-position: center; transition: transform var(--motion-normal) ease; }
+    .feature-card:hover .feature-card-img { transform: scale(1.03); }
+    .feature-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: var(--space-8); background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: var(--color-text-tertiary); }
+    .feature-card-overlay h3 { font-size: var(--font-size-lg); font-weight: var(--font-weight-bold); margin-bottom: var(--space-3); }
+    .feature-card-overlay p { font-size: var(--font-size-sm); line-height: 1.6; opacity: 0.9; }
+    .feature-card-overlay .btn { margin-top: var(--space-5); }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr; } }
+
+    .split-section { display: grid; grid-template-columns: 1fr 1fr; }
+    .split-img { min-height: 400px; background-size: cover; background-position: center; }
+    .split-content { padding: 80px 60px; display: flex; flex-direction: column; justify-content: center; }
+    .split-content .section-title { margin-bottom: var(--space-6); }
+    .split-content p { line-height: 1.8; margin-bottom: var(--space-7); font-size: var(--font-size-sm); }
+    @media (max-width: 900px) { .split-section { grid-template-columns: 1fr; } .split-content { padding: 50px var(--space-6); } }
+
+    .testimonials { text-align: center; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-8); }
+    .testimonial-card { text-align: center; }
+    .testimonial-avatar { width: 80px; height: 80px; border-radius: var(--radius-sm); object-fit: cover; margin: 0 auto var(--space-6); background: #ddd; }
+    .testimonial-card blockquote { font-size: var(--font-size-sm); line-height: 1.8; color: var(--color-text-primary); font-style: italic; margin-bottom: var(--space-6); }
+    .testimonial-card cite { font-style: normal; display: block; }
+    .testimonial-card .name { font-size: var(--font-size-sm); color: var(--color-text-secondary); font-weight: var(--font-weight-bold); }
+    .testimonial-card .role { font-size: var(--font-size-xs); color: var(--color-text-primary); letter-spacing: 1px; }
+    @media (max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr; } }
+
+    .logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 40px; margin-top: var(--space-8); }
+    .logo-item { opacity: 0.5; transition: opacity var(--motion-fast) ease; filter: grayscale(1); }
+    .logo-item:hover { opacity: 1; filter: grayscale(0); }
+    .logo-item div { width: 120px; height: 40px; background: var(--color-text-primary); border-radius: var(--radius-xs); }
+
+    .hero-reserve { text-align: center; }
+    .hero-reserve p { font-size: var(--font-size-md); line-height: 1.8; max-width: 700px; margin: 0 auto var(--space-8); opacity: 0.9; }
+
+    .footer { background: var(--color-surface-base); color: var(--color-text-primary); padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-8); }
+    .footer h4 { color: var(--color-text-tertiary); font-size: var(--font-size-sm); letter-spacing: 2px; text-transform: uppercase; margin-bottom: var(--space-6); }
+    .footer a { color: var(--color-text-primary); display: block; margin-bottom: var(--space-4); font-size: var(--font-size-sm); }
+    .footer a:hover { color: var(--color-text-tertiary); }
+    .footer-logo { margin-bottom: var(--space-6); }
+    .footer-logo div { width: 120px; height: 30px; background: var(--color-text-tertiary); opacity: 0.8; }
+    .footer p { font-size: var(--font-size-sm); line-height: 1.8; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); margin-top: var(--space-8); padding-top: var(--space-7); text-align: center; font-size: var(--font-size-xs); }
+    .footer-bottom a { display: inline; color: var(--color-text-tertiary); }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only" style="position:absolute;left:16px;top:16px;background:var(--color-text-secondary);color:var(--color-text-tertiary);padding:8px 16px;z-index:200;clip:auto;width:auto;height:auto;">Skip to main content</a>
+
+  <div class="topbar" role="region" aria-label="Announcement">
+    <span>Discover our summer retreats — book now and save 20%</span>
+    <a href="#reserve"> Reserve Your Adventure</a>
+  </div>
+
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo" aria-label="Nirvana home">
+        <span>Nirvana</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="nav-toggle" type="button">&#9776;</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#" aria-current="page">Home</a></li>
+        <li><a href="#retreats">Retreats</a></li>
+        <li><a href="#spa">Spa &amp; Wellness</a></li>
+        <li><a href="#cuisine">Cuisine</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#reserve" class="btn btn-primary" style="padding:10px 22px;">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section class="hero" aria-label="Welcome to Nirvana">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-sub">Welcome to</p>
+        <h1 class="hero-title">Nirvana Liveliness</h1>
+        <div class="hero-tags" aria-label="Activities">
+          <span>Retreats</span>
+          <span aria-hidden="true">●</span>
+          <span>Adventure</span>
+          <span aria-hidden="true">●</span>
+          <span>Spa</span>
+        </div>
+        <a href="#retreats" class="btn btn-outline">Our Story</a>
+      </div>
+    </section>
+
+    <section class="section section-light" id="retreats" aria-labelledby="retreats-title">
+      <div class="container" style="text-align:center;">
+        <p class="section-label">A sanctuary of escape</p>
+        <h2 class="section-title" id="retreats-title" style="max-width:600px;margin-left:auto;margin-right:auto;">
+          to help people reset themselves
+        </h2>
+        <p class="section-desc" style="margin-left:auto;margin-right:auto;">
+          A luxury yoga, fitness &amp; wellbeing holiday, focusing on your health in Mind, Body and Skin.
+          Remember to take care of yourself, you cannot pour from an empty cup.
+          Harmonize your body, mind &amp; soul with yoga. Take yoga beyond the Mat Training.
+          Do your practice and peace will come.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-light" style="padding-top:0;" aria-labelledby="retreats-upcoming">
+      <div class="container">
+        <p class="section-label" style="text-align:center;">Retreats Coming</p>
+        <hr style="border:0;border-top:1px solid rgba(0,0,0,0.06);margin-bottom:var(--space-8);" />
+        <div class="retreats-grid">
+          <article class="retreat-card">
+            <div class="retreat-card-img">
+              <div style="background-image:linear-gradient(135deg,#2a5a3a,#4a7a5a);"></div>
+            </div>
+            <p class="retreat-card-cat">Yoga &amp; Fitness</p>
+            <p class="retreat-card-date">March 2018</p>
+            <h3>yoga &amp; fitness</h3>
+            <p>Always control what goes inside. Just balance your mind and body with Yoga. Create the healthy living for yourself.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+          </article>
+          <article class="retreat-card">
+            <div class="retreat-card-img">
+              <div style="background-image:linear-gradient(135deg,#5a3a2a,#7a5a3a);"></div>
+            </div>
+            <p class="retreat-card-cat">Herbal Medicine</p>
+            <p class="retreat-card-date">April 2018</p>
+            <h3>herbal medicine</h3>
+            <p>The practice of naturopathic medicine includes modern, traditional, scientific, and empirical methods. Come for a healthy life.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+          </article>
+          <article class="retreat-card">
+            <div class="retreat-card-img">
+              <div style="background-image:linear-gradient(135deg,#2a3a5a,#3a5a7a);"></div>
+            </div>
+            <p class="retreat-card-cat">Guided Surfing Trip</p>
+            <p class="retreat-card-date">May 2018</p>
+            <h3>guided surfing trip</h3>
+            <p>Free your inner adventure with guided surfing trip. Enjoy the thrill, take the challenge and refresh your mind in the sea.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="spa" aria-labelledby="spa-title">
+      <div class="container">
+        <div class="feature-grid">
+          <article>
+            <div class="feature-card-img" style="height:300px;background-image:linear-gradient(135deg,#3a5a7a,#5a7a9a);" role="img" aria-label="Spa treatment room"></div>
+            <div style="padding:var(--space-6) 0;">
+              <h3 id="spa-title" style="font-size:var(--font-size-lg);margin-bottom:var(--space-5);">Spa &amp; Bath</h3>
+              <p style="line-height:1.8;margin-bottom:var(--space-6);">We offer the ideal atmosphere for relaxation and personal care. A real treat for the body and mind that will help you to balance the effects of work and stress.</p>
+              <a href="#" class="btn btn-inverse">Learn more</a>
+            </div>
+          </article>
+          <article>
+            <div class="feature-card-img" style="height:300px;background-image:linear-gradient(135deg,#2a5a3a,#4a7a5a);" role="img" aria-label="Relaxation area"></div>
+            <div style="padding:var(--space-6) 0;">
+              <h3 style="font-size:var(--font-size-lg);margin-bottom:var(--space-5);">Rest &amp; Relax</h3>
+              <p style="line-height:1.8;margin-bottom:var(--space-6);">Every now and then go away, have a little relaxation, for when you come back to your work your judgment will be surer.</p>
+              <a href="#" class="btn btn-inverse">Learn more</a>
+            </div>
+          </article>
+          <article>
+            <div class="feature-card-img" style="height:300px;background-image:linear-gradient(135deg,#5a3a2a,#7a5a3a);" role="img" aria-label="Nature trail"></div>
+            <div style="padding:var(--space-6) 0;">
+              <h3 style="font-size:var(--font-size-lg);margin-bottom:var(--space-5);">Explore Nature</h3>
+              <p style="line-height:1.8;margin-bottom:var(--space-6);">When all the world appears to be in a tumult, and nature itself is feeling the assault of climate change, the seasons retain their essential rhythm.</p>
+              <a href="#" class="btn btn-inverse">Learn more</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cuisine" aria-labelledby="cuisine-title">
+      <div class="split-section">
+        <div class="split-img" style="background-image:linear-gradient(135deg,#4a7a3a,#6a9a5a);" role="img" aria-label="Organic cuisine plate"></div>
+        <div class="split-content section-light">
+          <p class="section-label">Organic Cuisine</p>
+          <h2 class="section-title" id="cuisine-title">Organic Cuisine</h2>
+          <p>Nature has always cared for us. So why not taking that care? Come to Nirvana and taste our organic cuisine today. Organic foods may have higher nutritional value than conventional food that help building your good health.</p>
+          <a href="#" class="btn btn-primary">Learn more</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark hero-reserve" id="reserve" aria-labelledby="reserve-title">
+      <div class="container">
+        <h2 class="section-title" id="reserve-title" style="color:var(--color-text-tertiary);">Reserve Your Adventure</h2>
+        <p>Discover the world you've never seen, explore the horizon you never reached, unravel the mystery of nature. Reserve your life changing adventurous journey today with Nirvana along with Spa, Yoga and more healthy retreats.</p>
+        <a href="#" class="btn btn-inverse">Inquire</a>
+      </div>
+    </section>
+
+    <section class="section section-light testimonials" id="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <p class="section-label">Testimonials</p>
+        <hr style="border:0;border-top:1px solid rgba(0,0,0,0.06);margin-bottom:var(--space-8);" />
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#3a5a7a,#5a7a9a);" role="img" aria-label="John Doe"></div>
+            <blockquote>
+              "Change is not something that we should fear. Rather, it is something that we should welcome. For without change, nothing in this world would ever grow or blossom."
+            </blockquote>
+            <cite><span class="name">John Doe</span> <span class="role">Marketing Manager</span></cite>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#2a5a3a,#4a7a5a);" role="img" aria-label="Jack Foster"></div>
+            <blockquote>
+              "Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week in the woods. Wash your spirit clean."
+            </blockquote>
+            <cite><span class="name">Jack Foster</span> <span class="role">Marketing Manager</span></cite>
+          </article>
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" style="background:linear-gradient(135deg,#5a3a2a,#7a5a3a);" role="img" aria-label="Natasha Romanoff"></div>
+            <blockquote>
+              "We live in a wonderful world that is full of beauty, charm and adventure. There is no end to the adventures that we can have if only we seek them with our eyes open."
+            </blockquote>
+            <cite><span class="name">Natasha Romanoff</span> <span class="role">Marketing Manager</span></cite>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" style="padding-top:0;" aria-labelledby="featured-title">
+      <div class="container" style="text-align:center;">
+        <p class="section-label">As featured in</p>
+        <hr style="border:0;border-top:1px solid rgba(0,0,0,0.06);margin-bottom:var(--space-8);" />
+        <div class="logos">
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+          <div class="logo-item"><div></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><div style="background:var(--color-text-tertiary);"></div></div>
+          <p>Nirvana is a sanctuary of escape — a luxury wellness resort offering yoga, spa, adventure, and organic cuisine to help you reset, recharge, and reconnect with yourself.</p>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="tel:+12121234567">(212) 123-4567</a>
+          <a href="mailto:nirvana@abc.com">nirvana@abc.com</a>
+          <address style="font-style:normal;font-size:var(--font-size-sm);line-height:1.8;">666 Unnamed Ave, California</address>
+        </div>
+        <div>
+          <h4>Terms &amp; Products</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cancellation Policy</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Made with &hearts; by <a href="https://themewagon.com/" target="_blank" rel="noopener noreferrer">ThemeWagon</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var toggle = document.getElementById('nav-toggle');
+      var links = document.getElementById('nav-links');
+      if (toggle && links) {
+        toggle.addEventListener('click', function() {
+          var expanded = toggle.getAttribute('aria-expanded') === 'true' ? false : true;
+          toggle.setAttribute('aria-expanded', expanded);
+          links.classList.toggle('open');
+        });
+        document.addEventListener('click', function(e) {
+          if (!toggle.contains(e.target) && !links.contains(e.target)) {
+            toggle.setAttribute('aria-expanded', 'false');
+            links.classList.remove('open');
+          }
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            toggle.setAttribute('aria-expanded', 'false');
+            links.classList.remove('open');
+            toggle.focus();
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

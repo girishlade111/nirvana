@@ -217,3 +217,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Made with ❤️ for developers who value clean, accessible, and performant documentation sites.**
+
+---
+
+Built by [Girish Lade](https://ladestack.in)
